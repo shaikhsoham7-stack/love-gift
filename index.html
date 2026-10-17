@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe5ef">
+<title>A Little Love Quest 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff7eaa;--hot:#ff4f8b;--cream:#fff8f2;--ink:#63374b;--lav:#e9ddff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:'Nunito',sans-serif;background:radial-gradient(circle at 15% 10%,#fff 0 3%,transparent 22%),linear-gradient(135deg,#ffe3ee,#fff1d9 55%,#e8e0ff);overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer;border:0}
+.bg-hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.floaty{position:absolute;bottom:-60px;opacity:.45;animation:rise linear infinite;font-size:24px}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+main{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 14px}
+.card{width:min(100%,620px);background:rgba(255,255,255,.82);border:2px solid rgba(255,255,255,.9);border-radius:30px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #c96e8d26;backdrop-filter:blur(10px);animation:pop .5s ease both}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.page{display:none}.page.active{display:block;animation:pop .45s ease both}
+h1,h2,p{margin-top:0}
+h1,h2{font-family:'Baloo 2',cursive;line-height:1.12}
+h1{font-size:clamp(2rem,7vw,3rem);margin-bottom:12px}
+h2{font-size:clamp(1.7rem,6vw,2.3rem)}
+p{font-size:1.05rem;line-height:1.65}
+.eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:2px;color:#bb6b8c;font-weight:900}
+.mascot{font-size:70px;display:inline-block;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-4deg)}}
+input{width:100%;border:2px solid #f6bfd2;background:#fffafd;border-radius:17px;padding:15px 16px;outline:none;color:var(--ink);font-size:1rem;margin:8px 0 12px;transition:.2s}
+input:focus{border-color:var(--hot);box-shadow:0 0 0 4px #ff7eaa25}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 22px;font-weight:900;transition:transform .18s,box-shadow .18s;background:linear-gradient(135deg,#ff8eb7,#ff659b);color:white;box-shadow:0 7px 0 #df5c8a}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 0 #df5c8a}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #df5c8a}
+.btn.secondary{background:#fff;color:#ba6284;box-shadow:0 5px 0 #f2d4e0;border:1px solid #f5d9e4}
+.btnrow{display:flex;flex-wrap:wrap;gap:13px;justify-content:center;margin-top:20px}
+.error{min-height:26px;color:#d43b70;font-weight:900;margin:4px 0 0}
+.tiny{font-size:.88rem;color:#a56a82}
+.love-note{background:#fff8fc;border:1px dashed #f3a8c5;border-radius:22px;padding:20px;text-align:left;white-space:pre-line;line-height:1.85;font-size:1rem}
+.note-scroll{max-height:56vh;overflow-y:auto;padding-right:8px;scrollbar-color:#f5a9c4 #fff0f6;scrollbar-width:thin}
+.big-emoji{font-size:clamp(72px,18vw,120px);display:inline-block;animation:kiss 1s ease-in-out infinite alternate}
+@keyframes kiss{from{transform:scale(.92) rotate(-4deg)}to{transform:scale(1.1) rotate(4deg)}}
+.final-title{color:#ff4f8b;text-shadow:2px 3px #ffe0eb}
+.rose-bouquet{position:relative;width:min(100%,310px);height:190px;margin:14px auto 18px;display:flex;align-items:flex-start;justify-content:center;isolation:isolate}
+.rose-bouquet .rose{position:absolute;font-size:clamp(36px,10vw,52px);filter:drop-shadow(0 5px 4px #b72a4930);opacity:0;transform:translateY(32px) scale(.3) rotate(-18deg);animation:roseBloom .85s cubic-bezier(.2,.8,.2,1) forwards}
+.rose-bouquet .r1{left:calc(50% - 76px);top:22px;animation-delay:.1s}.rose-bouquet .r2{left:calc(50% - 28px);top:0;animation-delay:.25s}.rose-bouquet .r3{left:calc(50% + 22px);top:20px;animation-delay:.4s}.rose-bouquet .r4{left:calc(50% - 53px);top:62px;animation-delay:.55s}.rose-bouquet .r5{left:calc(50% + 1px);top:60px;animation-delay:.7s}
+.bouquet-wrap{position:absolute;z-index:-1;top:82px;width:146px;height:100px;background:linear-gradient(135deg,#ffb2c6,#e95a85);clip-path:polygon(8% 0,92% 0,68% 100%,32% 100%);transform-origin:top center;animation:wrapAppear .8s ease-out .55s both}
+.bouquet-ribbon{position:absolute;top:112px;width:92px;height:12px;border-radius:99px;background:#b92f61;box-shadow:0 4px 0 #8c2349;z-index:1;opacity:0;animation:wrapAppear .5s ease 1s forwards}
+.bouquet-bow{position:absolute;top:103px;font-size:27px;z-index:2;opacity:0;animation:wrapAppear .5s ease 1s forwards}
+@keyframes roseBloom{0%{opacity:0;transform:translateY(32px) scale(.3) rotate(-18deg)}70%{opacity:1;transform:translateY(-4px) scale(1.12) rotate(4deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes wrapAppear{from{opacity:0;transform:translateY(20px) scale(.75)}to{opacity:1;transform:translateY(0) scale(1)}}
+.center{text-align:center}
+.pill{display:inline-block;background:#fff0f6;border-radius:999px;padding:7px 12px;margin:3px;font-size:.9rem}
+#effects{position:fixed;inset:0;pointer-events:none;z-index:9;overflow:hidden}
+.burst{position:absolute;bottom:10%;font-size:36px;animation:burst 2.6s ease-out forwards}
+@keyframes burst{0%{transform:translateY(0) scale(.6) rotate(0);opacity:0}12%{opacity:1}100%{transform:translateY(-85vh) scale(1.25) rotate(25deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+@media(max-width:480px){.card{border-radius:25px}.btnrow .btn{width:100%}.love-note{font-size:.96rem}}
+</style>
+</head>
+<body>
+<div class="bg-hearts" id="bgHearts"></div><div id="effects"></div>
+<main><div class="card">
+  <section class="page active center" id="p1">
+    <div class="mascot">🐧💗</div><div class="eyebrow">a tiny love quest · level 1</div>
+    <h1>Are you Soham's<br>Madam Ji? 🥹💌</h1>
+    <p>Only the most special person can come inside… ✨🌷</p>
+    <form onsubmit="return checkName(event)">
+      <input id="name" autocomplete="off" placeholder="Type your full name here 💕" aria-label="Your name">
+      <button class="btn" type="submit">That's me! 💖</button>
+    </form><div class="error" id="e1"></div>
+    <p class="tiny">Hint: the girl with the prettiest name 🌸</p>
+  </section>
+
+  <section class="page center" id="p2">
+    <div class="mascot">💌🐥</div><div class="eyebrow">level 2 · secret nickname</div>
+    <h2>What does Soham call you most? 💞</h2>
+    <p>Type one of your super-special names, jaanu! 🫶</p>
+    <form onsubmit="return checkNick(event)">
+      <input id="nick" autocomplete="off" placeholder="Your cute nickname..." aria-label="Nickname">
+      <button class="btn" type="submit">Unlock my heart 🔐</button>
+    </form><div class="error" id="e2"></div>
+  </section>
+
+  <section class="page center" id="p3">
+    <div class="mascot">📅💘</div><div class="eyebrow">level 3 · our special day</div>
+    <h2>When did our little story begin? 🥺</h2>
+    <p>Enter our anniversary date to unlock the next surprise. 💗</p>
+    <form onsubmit="return checkDate(event)">
+      <input id="anniversary" autocomplete="off" placeholder="DD/MM/YY  🌷" aria-label="Anniversary date">
+      <button class="btn" type="submit">That's our day! 🗓️</button>
+    </form><div class="error" id="e3"></div>
+  </section>
+
+  <section class="page center" id="p4">
+    <div class="mascot">🥹💓🐧</div><div class="eyebrow">one last little question</div>
+    <h1>Do you love me? 🥺💗</h1>
+    <p>Choose honestly, Madam Ji… your Penguin is waiting! 🐧🌷</p>
+    <div class="btnrow">
+      <button class="btn" onclick="sayYes()">YES, my Penguin! 😚💋</button>
+      <button class="btn secondary" onclick="sayNo()">No 🙈</button>
+    </div><div class="error" id="e4"></div>
+  </section>
+
+  <section class="page center" id="p5">
+    <div class="big-emoji">💋😘💋</div>
+    <h1>MWAHHH! 😚💗</h1>
+    <p>A million kisses for my Inshu Jannu! 💋💋💋</p>
+    <button class="btn" onclick="go(6)">Open your letter 💌✨</button>
+  </section>
+
+  <section class="page" id="p6">
+    <div class="center"><div class="eyebrow">from your Penguin, with all my heart</div><h1>For my Mum 🥺💗</h1><p>Read till the very end, okay? 🫶🌷</p></div>
+    <div class="note-scroll" id="letterScroll"><div class="love-note">Mum, amake khoma kore dio mum. Ami tomake onek hurt korechi mum. Bishwas kor. Ami ichha kore kichhu korini. Bujhechis? Ami ichha kore kichhu korini. Hya, ami ichha kore ektu chup thekechi. But ami ichha kore eta chaini je tui hurt hosh.
+
+Ami-o, ami-o bhebe dhorechilam hoyto je, hoyto hya, tui-o hoyto chash egulo je amio hoyto rag kori. Tui bolechis amake. Thik ache?
+
+Mum, dekhbi prottekta relationship-e jhogra-jhamela hoy, bujhechis? Mum, ar tumi to jano je ami tomake chhara thakte parbo na, tumi amake chhara thakte parbe na. Tai na? Tai to amra eto jhogra-r poreo ekshonge thaki.
+
+Ar tui to janis, tui chhara amar keu nei. Tui chhara amar koshto bolar, tui chhara amake bojhar keu nei. Tui nijeo janis.
+
+Mum, ami tomake shudhu tomake khushi rakhar onek cheshta kori. Tomake ami mone mone shudhu bhabi je kise khushi rakhbo, kise khushi rakhbo. Tar jonno hoyto hya, hoyto ami ektu iye kori. But ami tomake shudhu etai chaichhi, tumi khushi thako. Bujhechho?
+
+Mum, ami tomake boddo bhalobashi. Tumi chhara amar duniyay keu nei go. Ekbar bhebe dekho. Tumi amar jaan, mum.
+
+Shob ager moto hoye jabe. Hya, shob ager moto korbe to? Shob ager moto korbe to?
+
+Jano? O jano? Onek onek onek onek onek valobasi. Onek onek onek onek onek love. Jano? Love you, jannu? Hmm. 💗</div></div>
+    <div class="center"><p class="tiny">Psst… keep scrolling to the bottom, lovebug. 🐰💕</p><button class="btn" id="letterNext" onclick="go(7)" disabled>I've read it all 💌</button></div>
+  </section>
+
+  <section class="page center" id="p7">
+    <div class="mascot">🐧💗🐧</div><div class="eyebrow">bonus buttons · choose your cuddle</div>
+    <h2>What should we do now, Inshu? 🥰</h2>
+    <div class="btnrow">
+      <button class="btn" onclick="burstEmojis(['🐧','👊','🐧','💥','😂','🐧'])">penguin ke marbo 🐧👊</button>
+      <button class="btn secondary" onclick="burstEmojis(['🫂','🤗','💗','🫶','🥹','💕'])">+ami tomar buke jabo 🫂</button>
+    </div>
+    <p class="tiny" style="margin-top:22px">Both choices lead to one final surprise… 💝</p>
+    <button class="btn" onclick="go(8)">One last surprise 🎁</button>
+  </section>
+
+  <section class="page center" id="p8">
+    <div class="mascot">🐧💞🐥</div>
+    <h1 class="final-title">I love you! 💗</h1>
+    <h2>Aamr Sunu Munu, amar Inshu Jannu, Inshu Pakhi 🥹🌷</h2>
+    <p style="font-family:'Baloo 2',cursive;font-size:1.5rem;line-height:1.5">My sugar pup, honeybunch, cutie little dumpling 😚😚😚😘😘😘</p>
+    <div class="rose-bouquet" aria-label="An animated bouquet of red roses">
+      <span class="rose r1">🌹</span><span class="rose r2">🌹</span><span class="rose r3">🌹</span><span class="rose r4">🌹</span><span class="rose r5">🌹</span>
+      <span class="bouquet-wrap"></span><span class="bouquet-ribbon"></span><span class="bouquet-bow">🎀</span>
+    </div>
+    <p>One red rose bouquet, just for you, my Inshu Pakhi. 🌹❤️</p>
+    <div class="big-emoji">🫂💋💗</div>
+    <p>Forever your Penguin. 🐧❤️</p>
+    <button class="btn" onclick="burstEmojis(['💗','💖','💘','😘','🐧','🌷','🫂','💋'])">Send more love! 💞</button>
+  </section>
+</div></main>
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function go(n){pages.forEach((p,i)=>p.classList.toggle('active',i===n-1));window.scrollTo({top:0,behavior:'smooth'});if(n===6){const sc=document.getElementById('letterScroll');sc.scrollTop=0;document.getElementById('letterNext').disabled=true;}if(n===8)burstEmojis(['🌹','🌹','❤️','💗','💖','😘','🐧','🫂']);}
+function fail(id,msg){document.getElementById(id).textContent=msg;burstEmojis(['💭','🥺','💗']);}
+function checkName(e){e.preventDefault();const v=document.getElementById('name').value.trim().toLowerCase().replace(/\s+/g,' ');if(v==='insha parvin'){go(2)}else fail('e1','Wrong name, cutie! Only Insha Parvin can enter. 🙈💗 Try again!');return false;}
+function checkNick(e){e.preventDefault();const v=document.getElementById('nick').value.trim().toLowerCase().replace(/[.!]/g,'').replace(/\s+/g,' ');const ok=['insha jannu','madam ji','sunu munu'];if(ok.includes(v)){go(3)}else fail('e2','Awww, that is not one of your secret names! Hint: Insha Jannu, Madam Ji, or Sunu Munu 💞');return false;}
+function checkDate(e){e.preventDefault();const v=document.getElementById('anniversary').value.trim();if(v==='29/12/25'||v==='29/12/2025'){go(4)}else fail('e3','Oopsie! Think of our special day again, jaanu. 📅💗');return false;}
+function sayYes(){burstEmojis(['💋','😘','💗','💋','💕','🐧']);setTimeout(()=>go(5),500);}
+function sayNo(){document.getElementById('e4').textContent='Hehe 🙈 try the other button, Madam Ji! Your Penguin has kisses ready. 💋';burstEmojis(['🥺','💗','🐧']);}
+function burstEmojis(arr){const box=document.getElementById('effects');for(let i=0;i<18;i++){const el=document.createElement('span');el.className='burst';el.textContent=arr[Math.floor(Math.random()*arr.length)];el.style.left=(Math.random()*95)+'%';el.style.bottom=(Math.random()*15)+'%';el.style.animationDelay=(Math.random()*.45)+'s';el.style.fontSize=(24+Math.random()*28)+'px';box.appendChild(el);setTimeout(()=>el.remove(),3200);}}
+const hearts=document.getElementById('bgHearts');for(let i=0;i<20;i++){const el=document.createElement('span');el.className='floaty';el.textContent=['💗','💖','💕','🌸','✨','🐧'][i%6];el.style.left=Math.random()*100+'%';el.style.animationDuration=(9+Math.random()*13)+'s';el.style.animationDelay=(-Math.random()*20)+'s';el.style.fontSize=(15+Math.random()*22)+'px';hearts.appendChild(el);}
+const scrollBox=document.getElementById('letterScroll');scrollBox.addEventListener('scroll',()=>{if(scrollBox.scrollTop+scrollBox.clientHeight>=scrollBox.scrollHeight-12)document.getElementById('letterNext').disabled=false;});
+</script>
+</body></html>
